@@ -1,0 +1,91 @@
+package com.healthfreedom.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.healthfreedom.exception.ApiRequestException;
+import com.healthfreedom.model.MParticipant;
+import com.healthfreedom.model.TParticipant;
+import com.healthfreedom.service.ParticipantService;
+
+@RestController
+@RequestMapping("/participantHist")
+public class HealthFreedomController {
+
+	@Autowired
+	ParticipantService pService;
+
+	// Actual
+	// 1-->
+	@GetMapping("/fetch/{username}")
+	@ResponseBody
+	public TParticipant participantData(@PathVariable("username") String username) {
+
+		TParticipant partData = null;
+		if(username !=null) {
+			try {
+				System.out.println("Fetch Req received, Username : " + username);
+				partData = pService.fetchParticipantData(username);
+			} catch (ApiRequestException e) {
+				throw new ApiRequestException("ApiException occured : " + e, e);
+			} catch (Exception e) {
+				System.out.println("Exception occured : " + e);
+			}
+		}
+		return partData;
+	}
+
+	// 2-->
+	@PostMapping(path = "/participant", consumes = "application/json", produces = "application/json")
+	@ResponseBody
+	public TParticipant addOrUpdateParticipant(@RequestBody TParticipant participant) {
+
+		TParticipant tPart = null;
+		if (participant != null) {
+			try {
+				System.out.println(participant.toString());
+				tPart = pService.insertParticipant(participant);
+			} catch (ApiRequestException e) {
+				throw new ApiRequestException("ApiException occured : " + e, e);
+			} catch (Exception e) {
+				System.out.println("Exception occured : " + e);
+			}
+		}
+		return tPart;
+	}
+
+	// 3-->
+	@PostMapping(path = "/participantData", consumes = "application/json", produces = "application/json")
+	@ResponseBody
+	public MParticipant addParticipantDetails(@RequestBody MParticipant participantData) {
+
+		MParticipant mPart = null;
+		if (participantData != null) {
+			try {
+				System.out.println(participantData.toString());
+				mPart = pService.insertParticipantData(participantData);
+			} catch (ApiRequestException e) {
+				throw new ApiRequestException("ApiException occured : " + e, e);
+			} catch (Exception e) {
+				System.out.println("Exception occured : " + e);
+			}
+		}
+		return mPart;
+	}
+
+	@CrossOrigin
+	@GetMapping("/home")
+	public String naveen() {
+
+		System.out.println("Request received from JavaScript");
+		return "Hey there !";
+	}
+
+}
