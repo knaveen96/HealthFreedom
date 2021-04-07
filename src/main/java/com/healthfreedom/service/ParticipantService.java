@@ -43,5 +43,11 @@ public class ParticipantService {
 		System.out.println(mp);
 		return mp;
 	}
+
+	public void insertImgAndName(String username, String imageCode, String name) {
+		
+		mRepo.insertNameImage(username,imageCode, name);
+		
+	}
 	
 }

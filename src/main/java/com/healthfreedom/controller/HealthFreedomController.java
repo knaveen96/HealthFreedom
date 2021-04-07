@@ -29,7 +29,7 @@ public class HealthFreedomController {
 	public TParticipant participantData(@PathVariable("username") String username) {
 
 		TParticipant partData = null;
-		if(username !=null) {
+		if (username != null) {
 			try {
 				System.out.println("Fetch Req received, Username : " + username);
 				partData = pService.fetchParticipantData(username);
@@ -78,6 +78,27 @@ public class HealthFreedomController {
 			}
 		}
 		return mPart;
+	}
+
+	// 4-->
+
+	@PostMapping(path = "/insertImgName/{username}/{imageCode}/{name}")
+	@ResponseBody
+	public void insertNameImgCode(@PathVariable("username") String username,
+			@PathVariable("imageCode") String imageCode,
+
+			@PathVariable("name") String name) {
+
+		if (username != null) {
+			try {
+				System.out.println("Username is : " + username + " " + imageCode + " " + name);
+				pService.insertImgAndName(username, imageCode, name);
+			} catch (ApiRequestException e) {
+				throw new ApiRequestException("ApiException occured : " + e, e);
+			} catch (Exception e) {
+				System.out.println("Exception occured : " + e);
+			}
+		}
 	}
 
 	@CrossOrigin
