@@ -24,6 +24,9 @@ public class MParticipant {
 	 * @Column(name="insertion_date") private String insertDate;
 	 */
 	
+	//list<messages> --> seperate table one to many
+	
+	
 	public String getUsername() {
 		return username;
 	}

@@ -12,10 +12,10 @@ import com.healthfreedom.model.MParticipant;
 @Repository
 public interface MParticipantRepository extends JpaRepository<MParticipant, String> {
 
-	@Modifying
-	@Transactional
+	//@Modifying
+	//@Transactional
 	//@Query(value = "insert into m_participant (image_code,name) VALUES (:imageCode,:name) where username= :username", nativeQuery = true)
-	@Query(value = "update m_participant mp set mp.image_code=:imageCode, mp.name =:name where mp.username = :username")
-	void insertNameImage(String username, String imageCode, String name);
+	//@Query(value = "update m_participant mp set mp.image_code=:imageCode, mp.name =:name where mp.username = :username")
+	//void insertNameImage(String username, String imageCode, String name);
 
 }

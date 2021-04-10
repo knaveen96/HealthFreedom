@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.healthfreedom.exception.ApiRequestException;
 import com.healthfreedom.model.MParticipant;
+import com.healthfreedom.model.ResponseDto;
 import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
@@ -26,80 +27,80 @@ public class HealthFreedomController {
 	// 1-->
 	@GetMapping("/fetch/{username}")
 	@ResponseBody
-	public TParticipant participantData(@PathVariable("username") String username) {
+	public ResponseDto participantData(@PathVariable("username") String username) {
 
-		TParticipant partData = null;
+		ResponseDto response = null;
 		if (username != null) {
 			try {
 				System.out.println("Fetch Req received, Username : " + username);
-				partData = pService.fetchParticipantData(username);
+				response = pService.fetchParticipantData(username);
 			} catch (ApiRequestException e) {
 				throw new ApiRequestException("ApiException occured : " + e, e);
 			} catch (Exception e) {
 				System.out.println("Exception occured : " + e);
 			}
 		}
-		return partData;
+		return response;
 	}
 
 	// 2-->
 	@PostMapping(path = "/participant", consumes = "application/json", produces = "application/json")
 	@ResponseBody
-	public TParticipant addOrUpdateParticipant(@RequestBody TParticipant participant) {
+	public ResponseDto addOrUpdateParticipant(@RequestBody TParticipant participant) {
 
 		TParticipant tPart = null;
+		ResponseDto response = null;
 		if (participant != null) {
 			try {
 				System.out.println(participant.toString());
-				tPart = pService.insertParticipant(participant);
+				response = pService.insertParticipant(participant);
 			} catch (ApiRequestException e) {
 				throw new ApiRequestException("ApiException occured : " + e, e);
 			} catch (Exception e) {
 				System.out.println("Exception occured : " + e);
 			}
 		}
-		return tPart;
+		return response;
 	}
 
 	// 3-->
 	@PostMapping(path = "/participantData", consumes = "application/json", produces = "application/json")
 	@ResponseBody
-	public MParticipant addParticipantDetails(@RequestBody MParticipant participantData) {
+	public ResponseDto addParticipantDetails(@RequestBody MParticipant participantData) {
 
 		MParticipant mPart = null;
+		ResponseDto response = null;
 		if (participantData != null) {
 			try {
 				System.out.println(participantData.toString());
-				mPart = pService.insertParticipantData(participantData);
+				response = pService.insertParticipantData(participantData);
 			} catch (ApiRequestException e) {
 				throw new ApiRequestException("ApiException occured : " + e, e);
 			} catch (Exception e) {
 				System.out.println("Exception occured : " + e);
 			}
 		}
-		return mPart;
+		return response;
 	}
 
 	// 4-->
 
-	@PostMapping(path = "/insertImgName/{username}/{imageCode}/{name}")
-	@ResponseBody
-	public void insertNameImgCode(@PathVariable("username") String username,
-			@PathVariable("imageCode") String imageCode,
-
-			@PathVariable("name") String name) {
-
-		if (username != null) {
-			try {
-				System.out.println("Username is : " + username + " " + imageCode + " " + name);
-				pService.insertImgAndName(username, imageCode, name);
-			} catch (ApiRequestException e) {
-				throw new ApiRequestException("ApiException occured : " + e, e);
-			} catch (Exception e) {
-				System.out.println("Exception occured : " + e);
-			}
-		}
-	}
+	/*
+	 * @PostMapping(path = "/insertImgName/{username}/{imageCode}/{name}")
+	 * 
+	 * @ResponseBody public void insertNameImgCode(@PathVariable("username") String
+	 * username,
+	 * 
+	 * @PathVariable("imageCode") String imageCode,
+	 * 
+	 * @PathVariable("name") String name) {
+	 * 
+	 * if (username != null) { try { System.out.println("Username is : " + username
+	 * + " " + imageCode + " " + name); pService.insertImgAndName(username,
+	 * imageCode, name); } catch (ApiRequestException e) { throw new
+	 * ApiRequestException("ApiException occured : " + e, e); } catch (Exception e)
+	 * { System.out.println("Exception occured : " + e); } } }
+	 */
 
 	@CrossOrigin
 	@GetMapping("/home")

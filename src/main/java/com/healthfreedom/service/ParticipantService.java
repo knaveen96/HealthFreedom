@@ -1,15 +1,16 @@
 package com.healthfreedom.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.healthfreedom.exception.ApiRequestException;
 import com.healthfreedom.model.MParticipant;
+import com.healthfreedom.model.ResponseDto;
 import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.repository.MParticipantRepository;
 import com.healthfreedom.repository.ParticipantRepository;
 import com.healthfreedom.repository.TempRepo;
+import com.healthfreedom.util.SetResponse;
 
 @Service
 public class ParticipantService {
@@ -22,32 +23,61 @@ public class ParticipantService {
 
 	@Autowired
 	MParticipantRepository mRepo;
+	
+	public ResponseDto fetchParticipantData(String username) throws ApiRequestException {
 
-	public TParticipant fetchParticipantData(String username) throws ApiRequestException {
-
+		ResponseDto response = null;
 		TParticipant participantData = pRepo.findByUsername(username);
+		if (participantData != null) {
+
+			response = new ResponseDto();
+			response.settParticipant(participantData);
+			response.setResponseCode("0");
+			response.setResponseDescription("Success");
+		}
 		System.out.println("Participant Data : " + participantData);
-		return participantData;
+		return response;
 	}
 
-	public TParticipant insertParticipant(TParticipant participant) throws ApiRequestException{
+	public ResponseDto insertParticipant(TParticipant participant) throws ApiRequestException {
 
+		ResponseDto response = null;
 		TParticipant tp = pRepo.save(participant);
+		if (tp != null) {
+
+			response = new ResponseDto();
+			response.settParticipant(tp);
+			response.setResponseCode("0");
+			response.setResponseDescription("Success");
+		}
 		System.out.println(tp);
-		return tp;
+		return response;
 	}
 
-	public MParticipant insertParticipantData(MParticipant participantData) throws ApiRequestException{
+	public ResponseDto insertParticipantData(MParticipant participantData) throws ApiRequestException {
 
+		ResponseDto response = null;
 		MParticipant mp = mRepo.save(participantData);
+		if(mp != null) {
+			response = new ResponseDto();
+			response.setmParticipant(mp);
+			response.setResponseCode("0");
+			response.setResponseDescription("Success");
+		}
 		System.out.println(mp);
-		return mp;
-	}
-
-	public void insertImgAndName(String username, String imageCode, String name) {
-		
-		mRepo.insertNameImage(username,imageCode, name);
-		
+		return response;
 	}
 	
+	
+	
+
+	/*
+	 * public void insertImgAndName(String username, String imageCode, String name)
+	 * {
+	 * 
+	 * mRepo.insertNameImage(username, imageCode, name);
+	 * 
+	 * }
+	 */
+
 }
