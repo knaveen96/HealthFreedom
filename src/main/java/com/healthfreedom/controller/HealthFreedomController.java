@@ -82,6 +82,14 @@ public class HealthFreedomController {
 		}
 		return response;
 	}
+	
+	
+	@GetMapping("/user")
+	public String user() {
+		return ("<h1>Welcome User</h1>");
+	}
+	
+	
 
 	// 4-->
 

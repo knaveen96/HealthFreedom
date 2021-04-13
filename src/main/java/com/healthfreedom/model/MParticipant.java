@@ -23,10 +23,18 @@ public class MParticipant {
 	/*
 	 * @Column(name="insertion_date") private String insertDate;
 	 */
+	@Column(name="login_flag")
+	private String loginFlag;
 	
 	//list<messages> --> seperate table one to many
 	
 	
+	public String getLoginFlag() {
+		return loginFlag;
+	}
+	public void setLoginFlag(String loginFlag) {
+		this.loginFlag = loginFlag;
+	}
 	public String getUsername() {
 		return username;
 	}
