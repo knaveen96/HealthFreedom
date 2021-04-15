@@ -17,7 +17,7 @@ import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
 @RestController
-@RequestMapping("/participantHist")
+//@RequestMapping("/participantHist")
 public class HealthFreedomController {
 
 	@Autowired
@@ -84,9 +84,9 @@ public class HealthFreedomController {
 	}
 	
 	
-	@GetMapping("/user")
+	@GetMapping("/login")
 	public String user() {
-		return ("<h1>Welcome User</h1>");
+		return ("<h1>Login Successful !!</h1>");
 	}
 	
 	

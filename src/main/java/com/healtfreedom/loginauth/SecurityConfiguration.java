@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -23,17 +25,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/participantHist/user").hasAnyRole("USER")
-                .antMatchers("/participantHist/fetch/{username}").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/user").permitAll()
                 .and().formLogin();
     }
+	 
 
+	/*
+	 * @Override protected void configure(HttpSecurity http) throws Exception {
+	 * http.authorizeRequests()
+	 * 
+	 * .antMatchers("/fetch/{username}").permitAll()
+	 * .antMatchers("/participant").permitAll()
+	 * .antMatchers("/participantData").permitAll() .anyRequest().authenticated(); }
+	 */
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/home");
+    }
+    
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
