@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.healtfreedom.loginauth.UserRepository;
+//import com.healtfreedom.loginauth.UserRepository;
 
 
 @SpringBootApplication//(exclude = {SecurityAutoConfiguration.class })

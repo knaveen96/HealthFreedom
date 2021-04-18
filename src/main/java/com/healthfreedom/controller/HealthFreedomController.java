@@ -17,7 +17,7 @@ import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
 @RestController
-//@RequestMapping("/participantHist")
+@RequestMapping("/participantHist")
 public class HealthFreedomController {
 
 	@Autowired
@@ -34,6 +34,24 @@ public class HealthFreedomController {
 			try {
 				System.out.println("Fetch Req received, Username : " + username);
 				response = pService.fetchParticipantData(username);
+			} catch (ApiRequestException e) {
+				throw new ApiRequestException("ApiException occured : " + e, e);
+			} catch (Exception e) {
+				System.out.println("Exception occured : " + e);
+			}
+		}
+		return response;
+	}
+	
+	@GetMapping("/fetchMessage/{username}")
+	@ResponseBody
+	public ResponseDto participantMessageData(@PathVariable("username") String username) {
+
+		ResponseDto response = null;
+		if (username != null) {
+			try {
+				System.out.println("Fetch Req received, Username : " + username);
+				response = pService.fetchParticipantMessageData(username);
 			} catch (ApiRequestException e) {
 				throw new ApiRequestException("ApiException occured : " + e, e);
 			} catch (Exception e) {

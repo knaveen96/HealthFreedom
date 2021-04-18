@@ -38,7 +38,22 @@ public class ParticipantService {
 		System.out.println("Participant Data : " + participantData);
 		return response;
 	}
+	
+	public ResponseDto fetchParticipantMessageData(String username) throws ApiRequestException {
 
+		ResponseDto response = null;
+		MParticipant messages = mRepo.findByUsername(username);
+		if (messages != null) {
+
+			response = new ResponseDto();
+			response.setmParticipant(messages);
+			response.setResponseCode("0");
+			response.setResponseDescription("Success");
+		}
+		System.out.println("Participant Data : " + messages);
+		return response;
+	}
+		
 	public ResponseDto insertParticipant(TParticipant participant) throws ApiRequestException {
 
 		ResponseDto response = null;
@@ -67,6 +82,8 @@ public class ParticipantService {
 		System.out.println(mp);
 		return response;
 	}
+
+	
 	
 	
 	

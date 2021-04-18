@@ -12,6 +12,8 @@ import com.healthfreedom.model.MParticipant;
 @Repository
 public interface MParticipantRepository extends JpaRepository<MParticipant, String> {
 
+	MParticipant findByUsername(String username);
+
 	//@Modifying
 	//@Transactional
 	//@Query(value = "insert into m_participant (image_code,name) VALUES (:imageCode,:name) where username= :username", nativeQuery = true)

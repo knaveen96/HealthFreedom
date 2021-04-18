@@ -1,8 +1,13 @@
 package com.healthfreedom.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +31,17 @@ public class MParticipant {
 	@Column(name="login_flag")
 	private String loginFlag;
 	
-	//list<messages> --> seperate table one to many
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_fid", referencedColumnName = "username")
+	private List<Messages> messages; 
 	
 	
+	public List<Messages> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<Messages> messages) {
+		this.messages = messages;
+	}
 	public String getLoginFlag() {
 		return loginFlag;
 	}
