@@ -17,7 +17,7 @@ import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
 @RestController
-@RequestMapping("/participantHist")
+@RequestMapping("/healthfreedom")
 public class HealthFreedomController {
 
 	@Autowired
