@@ -23,8 +23,6 @@ public class TParticipant {
 	@Column(name = "last_lat")
 	private String lastLat;
 	
-	//my walk parameters
-	
 	public String getUsername() {
 		return username;
 	}

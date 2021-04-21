@@ -9,8 +9,6 @@ import com.healthfreedom.model.ResponseDto;
 import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.repository.MParticipantRepository;
 import com.healthfreedom.repository.ParticipantRepository;
-import com.healthfreedom.repository.TempRepo;
-import com.healthfreedom.util.SetResponse;
 
 @Service
 public class ParticipantService {
@@ -19,12 +17,9 @@ public class ParticipantService {
 	ParticipantRepository pRepo;
 
 	@Autowired
-	TempRepo tRepo;
-
-	@Autowired
 	MParticipantRepository mRepo;
 	
-	public ResponseDto fetchParticipantData(String username) throws ApiRequestException {
+	public ResponseDto fetchParticipantData(String username) throws ApiRequestException,Exception {
 
 		ResponseDto response = null;
 		TParticipant participantData = pRepo.findByUsername(username);
@@ -39,7 +34,7 @@ public class ParticipantService {
 		return response;
 	}
 	
-	public ResponseDto fetchParticipantMessageData(String username) throws ApiRequestException {
+	public ResponseDto fetchParticipantMessageData(String username) throws ApiRequestException,Exception {
 
 		ResponseDto response = null;
 		MParticipant messages = mRepo.findByUsername(username);
@@ -54,7 +49,7 @@ public class ParticipantService {
 		return response;
 	}
 		
-	public ResponseDto insertParticipant(TParticipant participant) throws ApiRequestException {
+	public ResponseDto insertParticipant(TParticipant participant) throws ApiRequestException,Exception {
 
 		ResponseDto response = null;
 		TParticipant tp = pRepo.save(participant);
@@ -69,7 +64,7 @@ public class ParticipantService {
 		return response;
 	}
 
-	public ResponseDto insertParticipantData(MParticipant participantData) throws ApiRequestException {
+	public ResponseDto insertParticipantData(MParticipant participantData) throws ApiRequestException,Exception {
 
 		ResponseDto response = null;
 		MParticipant mp = mRepo.save(participantData);
@@ -82,19 +77,5 @@ public class ParticipantService {
 		System.out.println(mp);
 		return response;
 	}
-
-	
-	
-	
-	
-
-	/*
-	 * public void insertImgAndName(String username, String imageCode, String name)
-	 * {
-	 * 
-	 * mRepo.insertNameImage(username, imageCode, name);
-	 * 
-	 * }
-	 */
 
 }
