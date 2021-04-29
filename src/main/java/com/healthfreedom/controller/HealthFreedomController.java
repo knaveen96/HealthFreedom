@@ -16,7 +16,7 @@ import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
 @RestController
-@RequestMapping("/healthfreedom")
+//@RequestMapping("/healthfreedom")
 public class HealthFreedomController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class HealthFreedomController {
 				response = pService.fetchParticipantData(username);
 			} catch (ApiRequestException e) {
 				response.setResponseCode("1");
-				response.setResponseDescription("Exeption Occured : "+e);
+				response.setResponseDescription("Exeption Occured : "+e.getMessage());
 				System.out.println("Exception occured : " + e);
 			} catch (NullPointerException e) {
 				System.out.println("Null Pointer Exception occured : " + e);
@@ -115,5 +115,16 @@ public class HealthFreedomController {
 	public String user() {
 		return ("<h1>Login Successful !!</h1>");
 	}
+	
+	@GetMapping("/login1")
+	public String userr() {
+		return ("<h1>Login Successful !!</h1>");
+	}
+	
+	@GetMapping("/home")
+    public String home(){
+        return "This is Home Page";
+    }
+	
 	
 }

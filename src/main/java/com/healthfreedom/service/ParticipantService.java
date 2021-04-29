@@ -19,8 +19,9 @@ public class ParticipantService {
 	@Autowired
 	MParticipantRepository mRepo;
 	
-	public ResponseDto fetchParticipantData(String username) throws ApiRequestException,Exception {
+	public ResponseDto fetchParticipantData(String username) throws /* ApiRequestException, */Exception {
 
+		//try {
 		ResponseDto response = null;
 		TParticipant participantData = pRepo.findByUsername(username);
 		if (participantData != null) {

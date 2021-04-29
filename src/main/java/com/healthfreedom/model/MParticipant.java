@@ -31,6 +31,15 @@ public class MParticipant {
 	@Column(name="login_flag")
 	private String loginFlag;
 	
+	@Column(name="role")
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_fid", referencedColumnName = "username")
 	private List<Messages> messages; 

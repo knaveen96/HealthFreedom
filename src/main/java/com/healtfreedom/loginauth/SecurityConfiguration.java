@@ -17,7 +17,6 @@
  * org.springframework.security.crypto.password.NoOpPasswordEncoder; import
  * org.springframework.security.crypto.password.PasswordEncoder;
  * 
- * 
  * @EnableWebSecurity
  * 
  * @Configuration public class SecurityConfiguration extends
@@ -32,22 +31,19 @@
  * @Override protected void configure(HttpSecurity http) throws Exception {
  * http.authorizeRequests() .antMatchers("/admin").hasRole("ADMIN")
  * .antMatchers("/user").hasAnyRole("ADMIN", "USER")
- * .antMatchers("/user").permitAll() .and().formLogin(); }
- * 
+ * .antMatchers("/").permitAll() .antMatchers("/h2/").permitAll()
+ * .and().formLogin(); }
  * 
  * 
  * @Override protected void configure(HttpSecurity http) throws Exception {
  * http.authorizeRequests()
  * 
- * .antMatchers("/fetch/{username}").permitAll()
- * .antMatchers("/participant").permitAll()
- * .antMatchers("/participantData").permitAll() .anyRequest().authenticated(); }
- * 
+ * .antMatchers("/login").authenticated().anyRequest().permitAll()
+ * .antMatchers("/login1").permitAll() .and().formLogin(); }
  * 
  * @Override public void configure(WebSecurity web) throws Exception {
  * web.ignoring().antMatchers("/home"); }
  * 
  * @Bean public PasswordEncoder getPasswordEncoder() { return
  * NoOpPasswordEncoder.getInstance(); } }
- * 
  */
