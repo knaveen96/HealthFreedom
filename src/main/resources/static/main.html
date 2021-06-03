@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Health Freedom Virtual Walk</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+</head>
+
+<body>
+    <div class="row" style="margin-bottom: 0px;">
+        <div class="left-col col s12 m3">
+            <div class="row" style="padding-top: 10px;">
+                <div class="col s12">
+                    <ul class="tabs tabs-icon">
+                        <li class="tab col s4">
+                            <a class="active" href="#my-walk"><i class="material-icons">explore</i>My Walk</a>
+                        </li>
+                        <li class="tab col s4"><a href="#my-rewards"><i class="material-icons">card_giftcard</i>My
+                                Rewards</a></li>
+                        <li class="tab col s4"><a href="#profile"><i class="material-icons">person</i>Profile</a></li>
+                    </ul>
+                </div>
+                <div id="my-walk" class="col s12">
+                    <!-- Enter Steps -->
+                    <div class="steps-input-div">
+                        <div class="row">
+                            <div class="input-field col s10 m7">
+                                <label for="steps">Enter steps taken</label>
+                                <input type="text" class="steps" name="steps" id="steps" />
+                            </div>
+                            <div class="input-field col s2 m3">
+                                <a class="waves-effect waves-light btn custom-btn" id="enter-steps-btn">Enter</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Enter Steps ends -->
+
+                    <!-- Icons Summary -->
+                    <div class="icon-summary">
+                        <div class="row">
+                            <div class="col s12">
+                                <span>
+                                    <img class="img-icon" src="img/start-location.png" />
+                                    <span class="img-icon-label">Start Location</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <span>
+                                    <img class="img-icon" src="img/end-location.png" />
+                                    <span class="img-icon-label">End Location</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <span>
+                                    <img class="img-icon" src="img/pin-message.png" />
+                                    <span class="img-icon-label">Pinned Message</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Icons Summary ends -->
+
+                    <hr>
+                    <!-- Walk Overview -->
+                    <div class="walk-overview-div">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="block-heading">
+                                    Your Walk Overview
+                                </span>
+                            </div>
+                        </div>
+                        <div class="overview">
+                            <div class="row">
+                                <div class="col s6">
+                                    <span>
+                                        Total Miles
+                                    </span>
+                                </div>
+                                <div class="col s6">
+                                    <span id="total-miles">
+                                        4.1 miles
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <span>
+                                        You covered
+                                    </span>
+                                </div>
+                                <div class="col s6">
+                                    <span id="covered-miles">1.43</span> miles
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <span>
+                                        Remaining Miles
+                                    </span>
+                                </div>
+                                <div class="col s6">
+                                    <span id="remaining-miles">2.67</span> miles
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <span>
+                                        Total steps you walked
+                                    </span>
+                                </div>
+                                <div class="col s6">
+                                    <span id="total-steps">
+                                        1500
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Walk Overview ends -->
+
+                    <hr>
+                    <!-- Toggle Buttons 
+                    <div class="toggle-buttons-div">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="block-heading">
+                                    Click the toggle below to show or hide
+                                </span>
+                            </div>
+                        </div> -->
+                    <!-- Show all participants 
+                        <div class="row">
+                            <div class="col s3">
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" id="show-participants">
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col s9">
+                                <span>
+                                    Show all participants
+                                </span>
+                            </div>
+                        </div> -->
+                    <!-- Show all pins 
+                        <div class="row">
+                            <div class="col s3">
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" id="show-pins">
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col s9">
+                                <span>
+                                    Show all pins
+                                </span>
+                            </div>
+                        </div>
+                    </div>  -->
+                </div>
+                <div id="my-rewards" class="col s12">
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                            <img src="img/reward_unlocked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 1</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> 10 E Lombard St,
+                                Baltimore, MD 21202 <br>
+                                Total Distance: 0.5 miles
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=hnp1pt8biD4" target="_blank"
+                                class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <img src="img/reward_unlocked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 2</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> Charles Street and
+                                Saratoga Street, Baltimore <br>
+                                Total Distance: 1 miles
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=hnp1pt8biD4" target="_blank"
+                                class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <li class="collection-item avatar item-locked">
+                            <img src="img/reward_locked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 3</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> Lombard Street and South
+                                Street, Baltimore <br>
+                                Total Distance: 1.5 miles
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <li class="collection-item avatar item-locked">
+                            <img src="img/reward_locked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 4</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> President Street and
+                                Pratt Street, Baltimore <br>
+                                Total Distance: 2 miles
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <li class="collection-item avatar item-locked">
+                            <img src="img/reward_locked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 5</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> Pratt and Hanover
+                                Streets, Baltimore <br>
+                                Total Distance: 2.5 miles
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <!-- <li class="collection-item avatar item-locked">
+                            <img src="img/reward_locked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 6</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> Pratt and Paca Street, Baltimore <br>
+                                Total Distance: 3 miles
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li>
+                        <li class="collection-item avatar item-locked">
+                            <img src="img/reward_locked.png" alt="" class="circle">
+                            <span class="title reward-title">Milestone 7</span>
+                            <p class="reward-details"><i class="material-icons">location_on</i> St. Mary's Park, Baltimore <br>
+                                Total Distance: 3.5 miles
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">chevron_right</i></a>
+                        </li> -->
+
+                    </ul>
+                </div>
+                <!-- Profile Section -->
+                <div id="profile" class="col s12">
+                    <div class="row valign-wrapper profile-avatar">
+                        <div class="col s3">
+                            <span style="font-size: 10px;">Your avatar</span>
+                            <img src="img/avatar.png" alt="" class="circle responsive-img">
+                        </div>
+                        <div class="col s9">
+                            <span class="black-text">
+                                <a href="#!"><i class="material-icons"
+                                        style="position: relative;top: 6px; color: #000;">create</i></a>
+                                <span style="font-size: 14px;">Change avatar</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row profile-username">
+                        <div class="input-field col s12">
+                            <input value="S_Jones" id="disabled" type="text" class="validate">
+                            <label for="disabled">Username</label>
+                        </div>
+                    </div>
+                    <div class="row profile-pinned">
+                        <div class="row" style="margin-bottom: 0px;">
+                            <div class="col s12 heading">
+                                Messages you pinned
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul class="col s12 collection">
+                                <li class="collection-item">
+                                    <p class="msg-quote">"The Best Way To Get Started Is to Quit Talking And Begin
+                                        Doing."
+                                    </p>
+                                    <p><span class="msg-time">12:30 PM</span><span class="msg-like"
+                                            style="float: right;"><i class="material-icons">thumb_up</i> 5</span></p>
+                                    <p class="msg-location">1201 W North Ave, Baltimore, MD 21217 . 1.6 miles</p>
+                                </li>
+                                <li class="collection-item">
+                                    <p class="msg-quote">"You Learn More From Failure Than From Success. Don't Let It
+                                        Stop You. Failure Builds Character."
+                                    </p>
+                                    <p><span class="msg-time">12:30 PM</span><span class="msg-like"
+                                            style="float: right;"><i class="material-icons">thumb_up</i> 10</span></p>
+                                    <p class="msg-location">1201 W North Ave, Baltimore, MD 21217 . 2.1 miles</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m9" style="padding: 0px;">
+            <div id="mapid"></div>
+        </div>
+    </div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+    <script>
+        LeafIcon = L.Icon.extend({
+            options: {
+                // shadowUrl: 'leaf-shadow.png',
+                iconSize: [20, 20],
+                shadowSize: [50, 64],
+                iconAnchor: [10, 15],
+                shadowAnchor: [4, 62],
+                popupAnchor: [3, -15]
+            }
+        });
+
+        AvatarIcon = L.Icon.extend({
+            options: {
+                // shadowUrl: 'leaf-shadow.png',
+                iconSize: [45, 45],
+                shadowSize: [50, 64],
+                iconAnchor: [20, 25],
+                shadowAnchor: [4, 62],
+                popupAnchor: [3, -15]
+            }
+        });
+
+        latlngs = [
+            [39.29579688669739, -76.62507058719311],
+            [39.29628855804631, -76.62438638611937],
+            [39.29664785415618, -76.62482622966677],
+            [39.29829939291745, -76.6228635208114],
+            [39.29858047002673, -76.62288263742295],
+            [39.29835117036447, -76.62181210717712],
+            [39.29861005702933, -76.61590507421364],
+            [39.29779757545495, -76.6159108097535],
+            [39.29731655892205, -76.61592108372105],
+            [39.29633502426647, -76.61575586295962],
+            [39.29622680586155, -76.6156295572131],
+            [39.2877512522355, -76.61504914391453],
+            [39.28789355320145, -76.61079415919424],
+            [39.287700430397656, -76.6092839022719],
+            [39.287888471046685, -76.60638158244726],
+            [39.288279797240776, -76.6046874681604],
+            [39.28413913847009, -76.60199819220726],
+            [39.28413913847009, -76.60224670815718],
+            [39.286898761353214, -76.60418603429395],
+            [39.28628680312196, -76.62209733377678],
+            [39.29581087890949, -76.62276252161247],
+            [39.29591051365547, -76.62394269357905]
+        ];
+
+        $(document).ready(function () {
+            $('.tabs').tabs();
+            mymap = L.map('mapid').setView([39.300501020462974, -76.61294662303906], 13);
+
+            L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw", {
+                // maxZoom: 14,
+                minZoom: 13,
+                attribution:
+                    'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: "mapbox/streets-v11",
+                tileSize: 512,
+                zoomOffset: -1,
+            }).addTo(mymap);
+
+            // Fetch currentIndex of the current logged in user from Backend
+            currentIndex = 11;
+
+            polylineBlue = new L.Polyline([
+                latlngs.slice(0, currentIndex + 1) // Returns a co-oridnate
+            ], {
+                color: 'blue',
+                weight: 5,
+                opacity: 0.8
+            }).addTo(mymap);
+
+            polylineBlack = new L.Polyline([
+                latlngs.slice(currentIndex, latlngs.length) // Returns a co-oridnate
+            ], {
+                color: 'black',
+                weight: 5,
+                opacity: 0.8
+            }).addTo(mymap);
+
+            polyline = new L.Polyline([
+                latlngs
+            ], {
+                color: 'black',
+                weight: 0,
+                opacity: 0
+            }).addTo(mymap);
+
+            mymap.fitBounds(polylineBlack.getBounds());
+
+            var avatarIcon = new AvatarIcon({ iconUrl: 'img/avatar-map.png' }); // Get URL of Users avatar 
+            currentLocation = L.marker(latlngs[currentIndex], { icon: avatarIcon }).addTo(mymap).bindPopup("Current Location");
+
+            // Add start and end markers
+            var startIcon = new LeafIcon({ iconUrl: 'img/start-location.png' });
+            L.marker([39.29579688669739, -76.62507058719311], { icon: startIcon }).addTo(mymap).bindPopup("Start Location");
+            var endIcon = new LeafIcon({ iconUrl: 'img/end-location.png' });
+            L.marker([39.29591051365547, -76.62394269357905], { icon: endIcon }).addTo(mymap).bindPopup("End Location");
+
+            L.easyButton('<i class="material-icons">gps_fixed</i>', function () {
+                mymap.fitBounds(polyline.getBounds());
+            }).addTo(mymap);
+
+
+            // Pinnned Messages 
+            // Get Co-ordinates of Pinned messages and the actual message text
+            var pinnedMsgIcon = new LeafIcon({ iconUrl: 'img/pin-message.png' });
+            L.marker([39.28789355320145, -76.61079415919424], { icon: pinnedMsgIcon }).addTo(mymap).bindPopup("The Pessimist Sees Difficulty In Every Opportunity. The Optimist Sees Opportunity In Every Difficulty.");
+            L.marker([39.28628680312196, -76.62209733377678], { icon: pinnedMsgIcon }).addTo(mymap).bindPopup("The Best Way To Get Started Is to Quit Talking And Begin Doing.");
+            L.marker([39.29835117036447, -76.62181210717712], { icon: pinnedMsgIcon }).addTo(mymap).bindPopup("You Learn More From Failure Than From Success. Don't Let It Stop You. Failure Builds Character.");
+            L.marker([39.29633502426647, -76.61575586295962], { icon: pinnedMsgIcon }).addTo(mymap).bindPopup("It’s Not Whether You Get Knocked Down, It’s Whether You Get Up.");
+        });
+
+        $('#enter-steps-btn').click(() => {
+            if ($('#steps').val() == "") {
+                M.toast({ html: 'Please enter number of steps' });
+                return;
+            }
+
+            if (isNaN($('#steps').val())) {
+                M.toast({ html: 'Please enter a valid value' });
+                return;
+            }
+
+            var steps = $('#steps').val();
+
+            $('#steps').val("");
+
+            // Get actual current index from Backend after calculation of steps
+            currentIndex = (currentIndex + 1) % latlngs.length; // Dummy logic 
+
+
+            // Update current location
+            mymap.removeLayer(currentLocation);
+            var avatarIcon = new AvatarIcon({ iconUrl: 'img/avatar-map.png' });
+            currentLocation = L.marker(latlngs[currentIndex], { icon: avatarIcon }).addTo(mymap).bindPopup("Current Location");
+
+            // Redraw polyline
+            mymap.removeLayer(polylineBlack);
+            mymap.removeLayer(polylineBlue);
+
+            polylineBlue = new L.Polyline([
+                latlngs.slice(0, currentIndex + 1)
+            ], {
+                color: 'blue',
+                weight: 5,
+                opacity: 0.8
+            }).addTo(mymap);
+
+            polylineBlack = new L.Polyline([
+                latlngs.slice(currentIndex, latlngs.length)
+            ], {
+                color: 'black',
+                weight: 5,
+                opacity: 0.8
+            }).addTo(mymap);
+
+            M.toast({ html: 'Updated Current Location' });
+
+            var totalDistance = 4.1;
+            var newDistance = parseFloat($("#covered-miles").html()) + 0.25;
+            if (newDistance > totalDistance) {
+                newDistance = totalDistance;
+            }
+
+            var remainingDistance = totalDistance - newDistance;
+            if (remainingDistance < 0) {
+                remainingDistance = 0;
+            }
+
+            var totalSteps = parseFloat($("#total-steps").html()) + 500;
+
+            // Update HTML
+            $("#covered-miles").html(newDistance.toFixed(2));
+            $("#remaining-miles").html(remainingDistance.toFixed(2));
+            $("#total-steps").html(totalSteps.toFixed(0));
+
+            mymap.fitBounds(polyline.getBounds());
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
