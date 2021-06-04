@@ -13,11 +13,11 @@ import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
 
-    //private User user;
+    private User user;
     
-    private MParticipant user;
+    //private MParticipant user;
 
-    public CustomUserDetails(MParticipant user) {
+    public CustomUserDetails(User user) {
         super();
         this.user = user;
     }

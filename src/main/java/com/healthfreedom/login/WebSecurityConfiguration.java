@@ -35,8 +35,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/home")
                 .hasAuthority("USER")
-                .antMatchers("/admin")
-                .hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

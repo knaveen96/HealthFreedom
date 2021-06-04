@@ -13,12 +13,13 @@ import com.healthfreedom.repository.MParticipantRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private MParticipantRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        MParticipant user = userRepository.findByUsername(username);
+    	User user = userRepository.findByUsername(username);
+    	System.out.println("User details : "+ user);
         
         if(user ==null) {
             throw new UsernameNotFoundException("User Not Found");

@@ -35,7 +35,7 @@ public class ParticipantService {
 		return response;
 	}
 	
-	public ResponseDto fetchParticipantMessageData(String username) throws ApiRequestException,Exception {
+	public ResponseDto fetchParticipantMessageData(String username) throws Exception {
 
 		ResponseDto response = null;
 		MParticipant messages = mRepo.findByUsername(username);
@@ -50,7 +50,7 @@ public class ParticipantService {
 		return response;
 	}
 		
-	public ResponseDto insertParticipant(TParticipant participant) throws ApiRequestException,Exception {
+	public ResponseDto insertParticipant(TParticipant participant) throws Exception {
 
 		ResponseDto response = null;
 		TParticipant tp = pRepo.save(participant);
@@ -65,7 +65,7 @@ public class ParticipantService {
 		return response;
 	}
 
-	public ResponseDto insertParticipantData(MParticipant participantData) throws ApiRequestException,Exception {
+	public ResponseDto insertParticipantData(MParticipant participantData) throws Exception {
 
 		ResponseDto response = null;
 		MParticipant mp = mRepo.save(participantData);

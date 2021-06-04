@@ -16,7 +16,6 @@ import com.healthfreedom.model.TParticipant;
 import com.healthfreedom.service.ParticipantService;
 
 @RestController
-//@RequestMapping("/healthfreedom")
 public class HealthFreedomController {
 
 	@Autowired
@@ -31,10 +30,6 @@ public class HealthFreedomController {
 			try {
 				System.out.println("Fetch Req received, Username : " + username);
 				response = pService.fetchParticipantData(username);
-			} catch (ApiRequestException e) {
-				response.setResponseCode("1");
-				response.setResponseDescription("Exeption Occured : "+e.getMessage());
-				System.out.println("Exception occured : " + e);
 			} catch (NullPointerException e) {
 				System.out.println("Null Pointer Exception occured : " + e);
 			} catch (Exception e) {
@@ -53,11 +48,7 @@ public class HealthFreedomController {
 			try {
 				System.out.println("Fetch Req received, Username : " + username);
 				response = pService.fetchParticipantMessageData(username);
-			} catch (ApiRequestException e) {
-				response.setResponseCode("1");
-				response.setResponseDescription("Exeption Occured : "+e);
-				System.out.println("Exception occured : " + e);
-			} catch (NullPointerException e) {
+			}  catch (NullPointerException e) {
 				System.out.println("Null Pointer Exception occured : " + e);
 			} catch (Exception e) {
 				System.out.println("Exception occured : " + e);
@@ -75,11 +66,7 @@ public class HealthFreedomController {
 			try {
 				System.out.println(participant.toString());
 				response = pService.insertParticipant(participant);
-			} catch (ApiRequestException e) {
-				response.setResponseCode("1");
-				response.setResponseDescription("Exeption Occured : "+e);
-				System.out.println("Exception occured : " + e);
-			} catch (NullPointerException e) {
+			}  catch (NullPointerException e) {
 				System.out.println("Null Pointer Exception occured : " + e);
 			} catch (Exception e) {
 				System.out.println("Exception occured : " + e);
@@ -97,10 +84,6 @@ public class HealthFreedomController {
 			try {
 				System.out.println(participantData.toString());
 				response = pService.insertParticipantData(participantData);
-			} catch (ApiRequestException e) {
-				response.setResponseCode("1");
-				response.setResponseDescription("Exeption Occured : "+e);
-				System.out.println("Exception occured : " + e);
 			} catch (NullPointerException e) {
 				System.out.println("Null Pointer Exception occured : " + e);
 			} catch (Exception e) {
@@ -110,21 +93,8 @@ public class HealthFreedomController {
 		return response;
 	}
 	
-	
-	@GetMapping("/login")
-	public String user() {
-		return ("<h1>Login Successful !!</h1>");
-	}
-	
-	@GetMapping("/login1")
-	public String userr() {
-		return ("<h1>Login Successful !!</h1>");
-	}
-	
 	@GetMapping("/home")
-    public String home(){
-        return "This is Home Page";
-    }
-	
-	
+	public String home() {
+		return "This is Home Page";
+	}	
 }
